@@ -1,4 +1,5 @@
 import React, { Component, PropTypes, findDOMNode } from 'react';
+import Tour from './Tour';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 const DEFAULT_LOGIN = 'gaearon';
@@ -49,16 +50,33 @@ export default class Explore extends Component {
   }
 
   render() {
+
+    var steps=[{
+      ref: 'textIntro',
+      message: 'This is our intro'
+    },{
+      ref: 'loginOrRepo',
+      message: 'Type a text'
+    },{
+      ref: 'goButton',
+      message: 'Click on it!'
+    },{
+      ref: 'github',
+      message: 'Check our github repo!'
+    }];
+
     return (
       <div className='Explore'>
-        <p>Type a username or repo full name and hit 'Go':</p>
-        <input size='45'
-               ref='loginOrRepo'
-               onKeyUp={this.handleKeyUp}
-               onChange={this.handleOnChange}
-               value={this.state.loginOrRepo} />
-        <button onClick={this.handleGoClick}>Go!</button>
-        <p>Code on <a href={GITHUB_REPO} target='_blank'>Github</a>.</p>
+        <Tour name='Tour around the App' steps={steps}>
+          <p ref='textIntro'>Type a username or repo full name and hit 'Go':</p>
+          <input size='45'
+                 ref='loginOrRepo'
+                 onKeyUp={this.handleKeyUp}
+                 onChange={this.handleOnChange}
+                 value={this.state.loginOrRepo} />
+          <button ref='goButton' onClick={this.handleGoClick}>Go!</button>
+          <p ref='github'>Code on <a href={GITHUB_REPO} target='_blank'>Github</a>.</p>
+        </Tour>
       </div>
     );
   }
