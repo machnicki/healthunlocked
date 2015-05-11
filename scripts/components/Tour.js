@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import shouldPureComponentUpdate from 'react-pure-render/function';
+import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 
 export default class Tour extends Component {
   static propTypes = {
@@ -123,28 +124,31 @@ export default class Tour extends Component {
           })
           : this.props.children
         }
-        { this.state.show ?
-          <div className='container'  style={this.state.areaShow ? {
-              position: 'absolute',
-              left: this.state.areaLeft + 20,
-              top: this.state.areaTop + this.state.areaHeight + 20
-            } : null}>
-            <h3 ref='h3test'>{this.props.name} {this.state.length}</h3>
-            {this.state.message ? <p>{this.state.message}</p> : null }
-            <button onClick={this.slideBack} disabled={ this.state.activeIndex == 0 ? true : false }>Back</button>
-            <button onClick={this.slideNext} disabled={ this.state.activeIndex == (this.state.length - 1) ? true : false }>Next</button>
-            <button onClick={this.finishTour}>Finish</button>
-          </div>
-          : null }
-        { (this.state.show && this.state.areaShow) ?
-          <div className='area'  style={{
-            position: 'absolute',
-            left: this.state.areaLeft,
-            width: this.state.areaWidth,
-            top: this.state.areaTop,
-            height: this.state.areaHeight
-          }}></div>
-          : null }
+        <ReactCSSTransitionGroup transitionName="tour">
+          { this.state.show ?
+            <div key='tourContainer' className='tour-container'  style={this.state.areaShow ? {
+                left: this.state.areaLeft + 20,
+                top: this.state.areaTop + this.state.areaHeight + 20
+              } : null}>
+              <h3>{this.props.name}</h3>
+              {this.state.message ? <p>{this.state.message}</p> : null }
+              <div className='tour-buttons'>
+                <button onClick={this.slideBack} disabled={ this.state.activeIndex == 0 ? true : false }>Back</button>
+                <button onClick={this.slideNext} disabled={ this.state.activeIndex == (this.state.length - 1) ? true : false }>Next</button>
+                <button onClick={this.finishTour}>Finish</button>
+              </div>
+              <p className="tour-footer">{this.state.activeIndex + 1} / {this.state.length}</p>
+            </div>
+            : null }
+          { (this.state.show && this.state.areaShow) ?
+            <div key='area' className='tour-area'  style={{
+              left: this.state.areaLeft,
+              width: this.state.areaWidth,
+              top: this.state.areaTop,
+              height: this.state.areaHeight
+            }}></div>
+            : null }
+          </ReactCSSTransitionGroup>
       </div>
     );
   }

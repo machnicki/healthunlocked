@@ -1,0 +1,83 @@
+
+body {
+	font-family: sans-serif;
+}
+
+.tour-enter, .tour-leave.tour-leave-active {
+	opacity: 0.01;
+	transition: opacity .5s ease-in;
+}
+
+.tour-leave.tour-leave-active {
+	transition-duration: .2s;
+}
+
+.tour-enter.tour-enter-active, .tour-leave {
+	opacity: 1;
+}
+
+.tour-container {
+	position: absolute;
+	width: 300px;
+	background: rgba(215, 225, 246, 0.7);
+	border-radius: 5px;
+	border: 3px solid #7b94c7;
+	padding: 10px;
+	z-index: 101;
+	line-height: 1.4;
+	color: #1f2838;
+	transition: all 0.5s;
+}
+
+.tour-container * {
+	margin: 0;
+	padding: 0;
+}
+
+.tour-area {
+	position: absolute;
+	outline: 3px solid #2b4374;
+	-webkit-box-shadow: 0px 0px 300px 200px rgba(91,110,149,1);
+	-moz-box-shadow: 0px 0px 300px 200px rgba(91,110,149,1);
+	box-shadow: 0px 0px 300px 200px rgba(91,110,149,1);
+	z-index: 100;
+	transition: all 0.5s;
+}
+
+.tour-buttons {
+	display: flex;
+	margin-top: 10px;
+}
+
+.tour-buttons button {
+	flex: 1;
+	background: #7b94c7;
+	border: 1px solid #1f2838;
+	color: #1f2838;
+	border-radius: 4px;
+	text-align: center;
+	padding: 10px;
+	font-size: 12px;
+	margin: 3px;
+	transition: all 0.2s;
+	cursor: pointer;
+	outline: none;
+}
+
+.tour-buttons button:disabled {
+	cursor: default;
+	opacity: 0.4;
+}
+
+.tour-buttons button:hover:not(:disabled) {
+	color: white;
+	background: #2b4374;
+}
+
+.tour-footer {
+	display: block;
+	font-size: 11px;
+	color: #7b94c7;
+	text-align: center;
+	margin-top: 10px;
+}
